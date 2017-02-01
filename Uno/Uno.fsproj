@@ -45,6 +45,7 @@
     <Compile Include="Prelude.fs" />
     <Compile Include="Model.fs" />
     <Compile Include="Game.fs" />
+    <Compile Include="Serialization.fs" />
     <Compile Include="Uno.fs" />
     <None Include="App.config" />
   </ItemGroup>
