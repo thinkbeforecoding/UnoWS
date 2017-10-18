@@ -9,30 +9,29 @@ and StartGame = {
 
 type Event = 
     | GameStarted of GameStarted
+    | CardPlayed of CardPlayed
 
 and GameStarted = {
     Players: int
     FirstCard: Card
 }
+and CardPlayed = {
+    Player: int
+    Card: Card
+}
 
 type State = 
     | InitialState
-    | Started
-
-// let decide (command: Command) (state: State) : Event list = []
 
 type GameError =
     | GameAlreadyStarted
 
-let decide command state = 
-    match state, command with
-    | InitialState, StartGame cmd -> 
-        Ok [ GameStarted { Players = cmd.Players; FirstCard = cmd.FirstCard } ]
-    | Started, StartGame _ ->
-        Error GameAlreadyStarted
-        
-let evolve state event = 
-    match event with
-    | GameStarted _ -> Started
-    | _ -> state
+type Decide = Command -> State -> Result<Event list, GameError>
+type Evolve = State -> Event -> State
+
+
+let decide : Decide = fun  _ _ -> failwith "Not Implemented"
+       
+let evolve : Evolve =
+    fun _ _ -> failwith "Not Implemented"
 

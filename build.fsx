@@ -27,6 +27,11 @@ Target "Build" (fun _ ->
     |> Log "AppBuild-Output: "
 )
 
+Target "Tests" (fun _ ->
+    !! (buildDir </> "*.Tests.exe")
+    |> Testing.Expecto.Expecto id 
+)
+
 Target "Deploy" (fun _ ->
     !! (buildDir + "/**/*.*")
     -- "*.zip"
@@ -36,7 +41,8 @@ Target "Deploy" (fun _ ->
 // Build order
 "Clean"
   ==> "Build"
+  ==> "Tests"
   ==> "Deploy"
 
 // start build
-RunTargetOrDefault "Build"
+RunTargetOrDefault "Tests"
